@@ -1,5 +1,7 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card'
-import { createClient } from '@/lib/supabase/server'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card"
+import { createClient } from "@/lib/supabase/server"
+
+export const metadata = { title: "Dashboard" }
 
 export default async function DashboardPage() {
   const supabase = await createClient()

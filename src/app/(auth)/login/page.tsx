@@ -1,5 +1,8 @@
-import { LoginForm } from '@/components/auth/LoginForm'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card'
+import { Suspense } from "react"
+import { LoginForm } from "@/components/auth/LoginForm"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card"
+
+export const metadata = { title: "Login" }
 
 export default function LoginPage() {
   return (
@@ -10,7 +13,9 @@ export default function LoginPage() {
           <CardDescription>Sign in to your account to continue</CardDescription>
         </CardHeader>
         <CardContent>
-          <LoginForm />
+          <Suspense>
+            <LoginForm />
+          </Suspense>
         </CardContent>
       </Card>
     </div>

@@ -1,23 +1,25 @@
 "use client"
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
-import { Input } from '@/components/ui/Input'
-import { Button } from '@/components/ui/Button'
-import Link from 'next/link'
+import { useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
+import { createClient } from "@/lib/supabase/client"
+import { Input } from "@/components/ui/Input"
+import { Button } from "@/components/ui/Button"
+import Link from "next/link"
 
 export function LoginForm() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const searchParams = useSearchParams()
+  const callbackError = searchParams.get("error")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState(callbackError ?? "")
   const [loading, setLoading] = useState(false)
   const router = useRouter()
   const supabase = createClient()
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
-    setError('')
+    setError("")
     setLoading(true)
 
     const { error } = await supabase.auth.signInWithPassword({
@@ -29,13 +31,18 @@ export function LoginForm() {
       setError(error.message)
       setLoading(false)
     } else {
-      router.push('/dashboard')
+      router.push("/dashboard")
       router.refresh()
     }
   }
 
   return (
     <form onSubmit={handleLogin} className="space-y-4">
+      {error && (
+        <div className="text-sm text-red-600 bg-red-50 p-3 rounded">
+          {error}
+        </div>
+      )}
       <Input
         label="Email"
         type="email"
@@ -52,16 +59,16 @@ export function LoginForm() {
         required
         disabled={loading}
       />
-      {error && (
-        <div className="text-sm text-red-600 bg-red-50 p-3 rounded">
-          {error}
-        </div>
-      )}
+      <div className="flex justify-end">
+        <Link href="/reset-password" className="text-sm text-blue-600 hover:underline">
+          Forgot password?
+        </Link>
+      </div>
       <Button type="submit" className="w-full" disabled={loading}>
-        {loading ? 'Signing in...' : 'Sign in'}
+        {loading ? "Signing in..." : "Sign in"}
       </Button>
       <p className="text-center text-sm text-gray-600">
-        Don\'t have an account?{' '}
+        Don't have an account?{" "}
         <Link href="/signup" className="text-blue-600 hover:underline">
           Sign up
         </Link>

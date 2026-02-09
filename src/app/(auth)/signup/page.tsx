@@ -1,5 +1,7 @@
-import { SignupForm } from '@/components/auth/SignupForm'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card'
+import { SignupForm } from "@/components/auth/SignupForm"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card"
+
+export const metadata = { title: "Sign Up" }
 
 export default function SignupPage() {
   return (
