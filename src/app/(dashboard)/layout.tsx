@@ -1,6 +1,6 @@
-import { createClient } from '@/lib/supabase/server'
-import { redirect } from 'next/navigation'
-import { DashboardNav } from '@/components/layout/DashboardNav'
+import { createClient } from "@/lib/supabase/server"
+import { redirect } from "next/navigation"
+import { DashboardNav } from "@/components/layout/DashboardNav"
 
 export default async function DashboardLayout({
   children,
@@ -11,13 +11,13 @@ export default async function DashboardLayout({
   const { data: { user } } = await supabase.auth.getUser()
 
   if (!user) {
-    redirect('/login')
+    redirect("/login")
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-surface">
       <DashboardNav email={user.email} />
-      <main className="max-w-7xl mx-auto py-6 px-4">
+      <main className="max-w-7xl mx-auto py-8 px-6">
         {children}
       </main>
     </div>

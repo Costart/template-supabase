@@ -1,23 +1,23 @@
 import { Suspense } from "react"
 import { LoginForm } from "@/components/auth/LoginForm"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card"
+import Link from "next/link"
 
 export const metadata = { title: "Login" }
 
 export default function LoginPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle>Welcome back</CardTitle>
-          <CardDescription>Sign in to your account to continue</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Suspense>
-            <LoginForm />
-          </Suspense>
-        </CardContent>
-      </Card>
+    <div>
+      <h1 className="font-display text-2xl font-bold text-center text-on-surface">
+        Welcome back
+      </h1>
+      <p className="mt-2 text-center text-sm text-on-surface-variant">
+        Sign in to your account to continue
+      </p>
+      <div className="mt-8">
+        <Suspense>
+          <LoginForm />
+        </Suspense>
+      </div>
     </div>
   )
 }

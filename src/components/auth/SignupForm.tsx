@@ -1,16 +1,16 @@
 "use client"
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
-import { Input } from '@/components/ui/Input'
-import { Button } from '@/components/ui/Button'
-import Link from 'next/link'
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { createClient } from "@/lib/supabase/client"
+import { Input } from "@/components/ui/Input"
+import { Button } from "@/components/ui/Button"
+import Link from "next/link"
 
 export function SignupForm() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const router = useRouter()
@@ -18,7 +18,7 @@ export function SignupForm() {
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
-    setError('')
+    setError("")
     setLoading(true)
 
     const { error } = await supabase.auth.signUp({
@@ -41,10 +41,10 @@ export function SignupForm() {
   if (success) {
     return (
       <div className="text-center space-y-4">
-        <div className="text-green-600 bg-green-50 p-4 rounded">
+        <div className="rounded-lg border border-success/20 bg-success-container p-4 text-on-success-container">
           Check your email to confirm your account!
         </div>
-        <Link href="/login" className="text-blue-600 hover:underline text-sm">
+        <Link href="/login" className="text-sm font-medium text-primary hover:text-primary-hover">
           Back to login
         </Link>
       </div>
@@ -53,6 +53,11 @@ export function SignupForm() {
 
   return (
     <form onSubmit={handleSignup} className="space-y-4">
+      {error && (
+        <div className="rounded-lg border border-error/20 bg-error-container p-3 text-sm text-on-error-container">
+          {error}
+        </div>
+      )}
       <Input
         label="Email"
         type="email"
@@ -70,17 +75,12 @@ export function SignupForm() {
         disabled={loading}
         minLength={6}
       />
-      {error && (
-        <div className="text-sm text-red-600 bg-red-50 p-3 rounded">
-          {error}
-        </div>
-      )}
       <Button type="submit" className="w-full" disabled={loading}>
-        {loading ? 'Creating account...' : 'Sign up'}
+        {loading ? "Creating account..." : "Sign up"}
       </Button>
-      <p className="text-center text-sm text-gray-600">
-        Already have an account?{' '}
-        <Link href="/login" className="text-blue-600 hover:underline">
+      <p className="text-center text-sm text-on-surface-variant">
+        Already have an account?{" "}
+        <Link href="/login" className="font-medium text-primary hover:text-primary-hover">
           Sign in
         </Link>
       </p>

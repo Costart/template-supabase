@@ -4,9 +4,14 @@ export const metadata = { title: "Set New Password" }
 
 export default function UpdatePasswordPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <h1 className="text-2xl font-bold text-center mb-6">Set New Password</h1>
+    <div>
+      <h1 className="font-display text-2xl font-bold text-center text-on-surface">
+        Set a new password
+      </h1>
+      <p className="mt-2 text-center text-sm text-on-surface-variant">
+        Enter your new password below.
+      </p>
+      <div className="mt-8">
         <UpdatePasswordForm />
       </div>
     </div>

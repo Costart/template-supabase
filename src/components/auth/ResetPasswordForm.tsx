@@ -2,6 +2,8 @@
 
 import { useState } from "react"
 import { createClient } from "@/lib/supabase/client"
+import { Input } from "@/components/ui/Input"
+import { Button } from "@/components/ui/Button"
 import Link from "next/link"
 
 export function ResetPasswordForm() {
@@ -30,9 +32,13 @@ export function ResetPasswordForm() {
 
   if (sent) {
     return (
-      <div className="text-center">
-        <p className="text-gray-600 mb-4">Check your email for a password reset link.</p>
-        <Link href="/login" className="text-blue-600 hover:underline">Back to login</Link>
+      <div className="text-center space-y-4">
+        <div className="rounded-lg border border-primary/20 bg-primary-container p-4 text-on-primary-container">
+          Check your email for a password reset link.
+        </div>
+        <Link href="/login" className="text-sm font-medium text-primary hover:text-primary-hover">
+          Back to login
+        </Link>
       </div>
     )
   }
@@ -40,32 +46,21 @@ export function ResetPasswordForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {error && (
-        <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-md text-sm">
+        <div className="rounded-lg border border-error/20 bg-error-container p-3 text-sm text-on-error-container">
           {error}
         </div>
       )}
-      <div>
-        <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
-        <input
-          id="email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          disabled={loading}
-          className="w-full px-3 py-2 border rounded-md disabled:opacity-50"
-        />
-      </div>
-      <button
-        type="submit"
+      <Input
+        label="Email"
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
         disabled={loading}
-        className="w-full py-2 bg-black text-white rounded-md hover:bg-gray-800 disabled:opacity-50"
-      >
+      />
+      <Button type="submit" className="w-full" disabled={loading}>
         {loading ? "Sending..." : "Send reset link"}
-      </button>
-      <p className="text-center text-sm">
-        <Link href="/login" className="text-blue-600 hover:underline">Back to login</Link>
-      </p>
+      </Button>
     </form>
   )
 }

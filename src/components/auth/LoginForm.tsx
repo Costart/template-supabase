@@ -39,7 +39,7 @@ export function LoginForm() {
   return (
     <form onSubmit={handleLogin} className="space-y-4">
       {error && (
-        <div className="text-sm text-red-600 bg-red-50 p-3 rounded">
+        <div className="rounded-lg border border-error/20 bg-error-container p-3 text-sm text-on-error-container">
           {error}
         </div>
       )}
@@ -60,16 +60,16 @@ export function LoginForm() {
         disabled={loading}
       />
       <div className="flex justify-end">
-        <Link href="/reset-password" className="text-sm text-blue-600 hover:underline">
+        <Link href="/reset-password" className="text-sm text-primary hover:text-primary-hover">
           Forgot password?
         </Link>
       </div>
       <Button type="submit" className="w-full" disabled={loading}>
         {loading ? "Signing in..." : "Sign in"}
       </Button>
-      <p className="text-center text-sm text-gray-600">
-        Don't have an account?{" "}
-        <Link href="/signup" className="text-blue-600 hover:underline">
+      <p className="text-center text-sm text-on-surface-variant">
+        Don\u0027t have an account?{" "}
+        <Link href="/signup" className="font-medium text-primary hover:text-primary-hover">
           Sign up
         </Link>
       </p>

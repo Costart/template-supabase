@@ -1,15 +1,16 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Inter, Plus_Jakarta_Sans } from "next/font/google"
 import "./globals.css"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
 })
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
+  variable: "--font-jakarta",
+  weight: ["500", "600", "700", "800"],
 })
 
 export const metadata: Metadata = {
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${jakarta.variable} font-sans min-h-screen bg-surface antialiased`}
       >
         {children}
       </body>

@@ -3,6 +3,8 @@
 import { useState } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
+import { Input } from "@/components/ui/Input"
+import { Button } from "@/components/ui/Button"
 
 export function UpdatePasswordForm() {
   const [password, setPassword] = useState("")
@@ -34,43 +36,31 @@ export function UpdatePasswordForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {error && (
-        <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-md text-sm">
+        <div className="rounded-lg border border-error/20 bg-error-container p-3 text-sm text-on-error-container">
           {error}
         </div>
       )}
-      <div>
-        <label htmlFor="password" className="block text-sm font-medium mb-1">New password</label>
-        <input
-          id="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          minLength={6}
-          disabled={loading}
-          className="w-full px-3 py-2 border rounded-md disabled:opacity-50"
-        />
-      </div>
-      <div>
-        <label htmlFor="confirm" className="block text-sm font-medium mb-1">Confirm password</label>
-        <input
-          id="confirm"
-          type="password"
-          value={confirm}
-          onChange={(e) => setConfirm(e.target.value)}
-          required
-          minLength={6}
-          disabled={loading}
-          className="w-full px-3 py-2 border rounded-md disabled:opacity-50"
-        />
-      </div>
-      <button
-        type="submit"
+      <Input
+        label="New password"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+        minLength={6}
         disabled={loading}
-        className="w-full py-2 bg-black text-white rounded-md hover:bg-gray-800 disabled:opacity-50"
-      >
+      />
+      <Input
+        label="Confirm password"
+        type="password"
+        value={confirm}
+        onChange={(e) => setConfirm(e.target.value)}
+        required
+        minLength={6}
+        disabled={loading}
+      />
+      <Button type="submit" className="w-full" disabled={loading}>
         {loading ? "Updating..." : "Update password"}
-      </button>
+      </Button>
     </form>
   )
 }

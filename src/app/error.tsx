@@ -8,15 +8,20 @@ export default function GlobalError({
   reset: () => void
 }) {
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div className="flex min-h-screen flex-col items-center justify-center px-4">
       <div className="text-center">
-        <h2 className="text-2xl font-bold mb-4">Something went wrong</h2>
-        <p className="text-gray-600 mb-4">
-          {error.digest ? `Error: ${error.digest}` : error.message}
+        <h1 className="font-display text-2xl font-bold text-on-surface">
+          Something went wrong
+        </h1>
+        <p className="mt-2 text-on-surface-variant">
+          An unexpected error occurred. Please try again.
         </p>
+        {error.digest && (
+          <p className="mt-1 text-xs text-outline">Error ID: {error.digest}</p>
+        )}
         <button
           onClick={reset}
-          className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800"
+          className="mt-6 rounded-lg bg-primary px-6 py-2.5 text-sm font-semibold text-on-primary shadow-elevation-1 hover:bg-primary-hover hover:shadow-elevation-2 transition-all active:scale-[0.98]"
         >
           Try again
         </button>
